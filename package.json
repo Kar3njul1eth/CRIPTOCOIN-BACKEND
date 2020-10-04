@@ -1,0 +1,25 @@
+{
+  "name": "criptocoin-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kar3njul1eth/CRIPTOCOIN-BACKEND.git"
+  },
+  "author": "Karen Rodriguez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kar3njul1eth/CRIPTOCOIN-BACKEND/issues"
+  },
+  "homepage": "https://github.com/Kar3njul1eth/CRIPTOCOIN-BACKEND#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
