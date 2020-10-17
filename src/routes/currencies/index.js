@@ -19,12 +19,17 @@ router.post("/create", async (req, res) => {
   res.status(202).json(data);
 });
 
-router.delete("/delete", (req, res) => {
-  res.status(202).json([]);
+router.delete("/delete/:id", async (req, res) => {
+  const { id } = req.params;
+  const data = await new CurrenciesRepository().delete(id);
+  res.status(202).json(data);
 });
 
-router.put("/update", (req, res) => {
-  res.status(202).json([]);
+router.put("/update/:id", async (req, res) => {
+  const { id } = req.params;
+  const currency = req.body;
+  const data = await new CurrenciesRepository().update(currency, id);
+  res.status(202).json(data);
 });
 
 module.exports = router;

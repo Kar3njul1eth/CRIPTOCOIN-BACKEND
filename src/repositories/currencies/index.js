@@ -15,6 +15,16 @@ class CurrenciesRepository {
   create(currency) {
     return models.currencies.create(currency);
   }
+
+  delete(id) {
+    return models.currencies.destroy({ where: { id: { [Op.eq]: id } } });
+  }
+
+  update(currency, id) {
+    return models.currencies.update(currency, {
+      where: { id: { [Op.eq]: id } }
+    });
+  }
 }
 
 module.exports = CurrenciesRepository;
