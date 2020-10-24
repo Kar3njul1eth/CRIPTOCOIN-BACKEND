@@ -6,9 +6,9 @@ class NewsRepository {
     return models.news.findAll();
   }
 
-  getNewByName(name) {
+  getNewByName(titulo) {
     return models.news.findAll({
-      where: { name: { [Op.eq]: name } }
+      where: { titulo: { [Op.eq]: titulo } }
     });
   }
 
@@ -19,6 +19,7 @@ class NewsRepository {
   delete(id) {
     return models.news.destroy({ where: { id: { [Op.eq]: id } } });
   }
+
 
   update(news, id) {
     return models.news.update(news, {

@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:titulo", async (req, res) => {
   const { titulo } = req.params;
-  const data = await new NewsRepository().getNewsByName(titulo);
+  const data = await new NewsRepository().getNewByName(titulo);
   res.status(202).json(data);
 });
 
