@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const userSchema = require("../schemas/users");
 
 const currencies = {
   attributes: {
@@ -6,17 +7,21 @@ const currencies = {
     name: { allowNull: false, type: Sequelize.STRING },
     currentPrice: { allowNull: false, type: Sequelize.FLOAT },
     lastDate: { allowNull: false, type: Sequelize.DATE },
-    userId: { allowNull: false, type: Sequelize.INTEGER },
+    userId: {
+      allowNull: false,
+      type: Sequelize.INTEGER,
+      references: { model: userSchema.name, key: "id" },
+    },
     createdAt: {
       type: Sequelize.DATE,
-      defaultValue: new Date()
+      defaultValue: new Date(),
     },
     updatedAt: {
       type: Sequelize.DATE,
-      defaultValue: new Date()
-    }
+      defaultValue: new Date(),
+    },
   },
-  name: "currencies"
+  name: "currencies",
 };
 
 module.exports = currencies;

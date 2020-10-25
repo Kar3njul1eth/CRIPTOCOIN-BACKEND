@@ -1,14 +1,22 @@
-const { Op } = require("sequelize");
+const { Op, col } = require("sequelize");
 const models = require("../../../models");
 
 class CurrenciesRepository {
   getAll() {
-    return models.currencies.findAll();
+    return models.currencies.findAll({
+      include: [
+        {
+          model: models.users,
+          where: { user: col("currencies.userId") },
+          attributes: ["id", "name"],
+        },
+      ],
+    });
   }
 
   getCurrencyByName(name) {
     return models.currencies.findAll({
-      where: { name: { [Op.eq]: name } }
+      where: { name: { [Op.eq]: name } },
     });
   }
 
@@ -22,7 +30,7 @@ class CurrenciesRepository {
 
   update(currency, id) {
     return models.currencies.update(currency, {
-      where: { id: { [Op.eq]: id } }
+      where: { id: { [Op.eq]: id } },
     });
   }
 }
