@@ -1,7 +1,7 @@
 {
   "development": {
     "dialect": "sqlite",
-    "storage": "/Users/jersson/Documents/sqlite/cryptocurrencies.db"  
+    "storage": "Users/Karen/Documents/2. Desarrollo/DB/cryptocurrencies.db" 
   },
   "test": {
     "username": "root",

@@ -3,9 +3,9 @@ const Sequelize = require("sequelize");
 const news = {
   attributes: {
     id: { autoIncrement: true, primaryKey: true, type: Sequelize.INTEGER },
-    titulo: { allowNull: false, type: Sequelize.STRING },
-    descripcion: { allowNull: false, type: Sequelize.STRING },
-    categoria: { allowNull: false, type: Sequelize.STRING },
+    title: { allowNull: false, type: Sequelize.STRING },
+    description: { allowNull: false, type: Sequelize.STRING },
+    category: { allowNull: false, type: Sequelize.STRING },
     lastDate: { allowNull: false, type: Sequelize.DATE },
     userId: { allowNull: false, type: Sequelize.INTEGER },
     createdAt: {

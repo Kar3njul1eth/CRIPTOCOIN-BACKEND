@@ -6,9 +6,9 @@ class NewsRepository {
     return models.news.findAll();
   }
 
-  getNewByName(titulo) {
+  getNewByName(title) {
     return models.news.findAll({
-      where: { titulo: { [Op.eq]: titulo } }
+      where: { title: { [Op.eq]: title } }
     });
   }
 
