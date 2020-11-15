@@ -8,9 +8,9 @@ router.get("/", async (req, res) => {
   res.status(202).json(data);
 });
 
-router.get("/:titulo", async (req, res) => {
-  const { titulo } = req.params;
-  const data = await new NewsRepository().getNewByName(titulo);
+router.get("/:title", async (req, res) => {
+  const { title } = req.params;
+  const data = await new NewsRepository().getNewByName(title);
   res.status(202).json(data);
 });
 
