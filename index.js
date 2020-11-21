@@ -1,5 +1,5 @@
 const express = require("express");
-const { news, users, currencies } = require("./src/routes");
+const { news, users, currencies, persons } = require("./src/routes");
 
 const app = express();
 
@@ -15,3 +15,4 @@ app.listen(process.env.PORT || 3001, () => {
 app.use("/news", news);
 app.use("/users", users);
 app.use("/currencies", currencies);
+app.use("/persons", persons);
