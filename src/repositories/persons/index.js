@@ -1,24 +1,32 @@
-const { Op } = require('sequelize');
-const { DateTime } = require('luxon');
-const models = require('../../../models');
-const sha256 = require('crypto-js/sha256');
+const { Op } = require("sequelize");
+const { DateTime } = require("luxon");
+const models = require("../../../models");
+const sha256 = require("crypto-js/sha256");
 
 class PersonsRepository {
   getAll() {
     return models.persons.findAll({
-      attributes: ['id', 'name', 'lastName', 'birthdate', 'email'],
+      attributes: ["id", "name", "lastName", "birthdate", "email"],
     });
   }
 
-  getPersonByName(name) {
-    return models.persons.findAll({
-      where: { name: { [Op.eq]: name } },
+  getPersonByEmail(email) {
+    return models.persons.findOne({
+      where: { email: { [Op.eq]: email } },
+      attributes: [
+        "name",
+        "lastName",
+        "birthdate",
+        "email",
+        "photo",
+        "password",
+      ],
     });
   }
 
   getPhotoById(id) {
     return models.persons.findOne({
-      attributes: ['photo'],
+      attributes: ["photo"],
       where: { id: { [Op.eq]: id } },
     });
   }
@@ -29,6 +37,19 @@ class PersonsRepository {
       return models.persons.create(this.formatPerson(person));
     }
     return validation;
+  }
+
+  async login(credentials) {
+    if (!credentials || !credentials.email || !credentials.password) {
+      return { error: "Datos insuficientes." };
+    }
+    const person = await this.getPersonByEmail(credentials.email);
+    const hashedPassword = sha256(credentials.password).toString();
+    if (hashedPassword === person.password) {
+      person.password = undefined;
+      return person;
+    }
+    return { error: "La contraseña o el correo ingresados son validos." };
   }
 
   delete(id) {
@@ -56,13 +77,13 @@ class PersonsRepository {
 
   validatePerson(person) {
     if (
-      !new RegExp('^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$').test(
+      !new RegExp("^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$").test(
         person.password
       )
     ) {
       return {
         error:
-          'La clave ingresada no es valida, debe tener minimo 8 caracteres entre mayusculas y miniculas y al menos un numero.',
+          "La clave ingresada no es valida, debe tener minimo 8 caracteres entre mayusculas y miniculas y al menos un numero.",
         code: 406,
       };
     }
